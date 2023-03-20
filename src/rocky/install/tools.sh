@@ -18,7 +18,9 @@ dnf -y install vim sudo wget which net-tools bzip2 findutils procps \
     pciutils \
     lsscsi \
     util-linux-ng \
-    supervisor
+    supervisor \
+    curl \
+    zip
 
 dnf -y install mailcap
 dnf clean all

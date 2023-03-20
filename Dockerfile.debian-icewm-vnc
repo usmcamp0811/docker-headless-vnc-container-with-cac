@@ -29,7 +29,10 @@ ENV HOME=/headless \
     VNC_COL_DEPTH=24 \
     VNC_RESOLUTION=1280x1024 \
     VNC_PW=vncpassword \
-    VNC_VIEW_ONLY=false
+    VNC_USER=vnc_user \
+    VNC_VIEW_ONLY=false \
+    DOD_CERT_URL=https://dl.dod.cyber.mil/wp-content/uploads/pki-pke/zip/unclass-certificates_pkcs7_DoD.zip
+
 WORKDIR $HOME
 
 ### Add all install scripts for further steps
@@ -59,7 +62,8 @@ ADD ./src/debian/icewm/ $HOME/
 RUN $INST_SCRIPTS/libnss_wrapper.sh
 ADD ./src/common/scripts $STARTUPDIR
 RUN $INST_SCRIPTS/set_user_permission.sh $STARTUPDIR $HOME \
-&&  useradd --uid 1000 --home /headless vnc_user
+&&  useradd --uid 1000 --home /headless $VNC_USER \
+&&  $STARTUPDIR/chrome_cac.sh
 
 COPY ./src/supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 CMD ["/usr/bin/supervisord"]

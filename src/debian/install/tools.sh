@@ -7,6 +7,7 @@ apt-get update
 apt-get install -y vim wget net-tools locales bzip2 procps \
     opensc-pkcs11 libpam-pkcs11 pcscd \
     libnss3-tools \
+    zip curl \
     python3-numpy #used for websockify/novnc
   
 apt-get clean -y
